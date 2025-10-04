@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Products</h2>
+<form method="post" style="display:grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap:8px; align-items:end;">
+  <label>Name<input name="name" required></label>
+  <label>SKU<input name="sku"></label>
+  <label>Unit<input name="unit" placeholder="tablet, bottle, ..."></label>
+  <label>Low stock threshold<input name="low_stock_threshold" type="number" value="0"></label>
+  <button type="submit">Add</button>
+</form>
+
+<table>
+  <thead><tr><th>Name</th><th>SKU</th><th>Unit</th><th>Threshold</th><th>Stock</th></tr></thead>
+  <tbody>
+    {% for p in products %}
+      <tr>
+        <td>{{ p['name'] }}</td>
+        <td>{{ p['sku'] or '' }}</td>
+        <td>{{ p['unit'] or '' }}</td>
+        <td>{{ p['low_stock_threshold'] }}</td>
+        <td>{{ p['stock_on_hand'] }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

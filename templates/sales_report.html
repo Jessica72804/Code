@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Sales Report</h2>
+<form method="get" style="display:flex; gap:8px; align-items:end;">
+  <label>Start<input type="date" name="start" value="{{ start }}"></label>
+  <label>End<input type="date" name="end" value="{{ end }}"></label>
+  <button type="submit">Run</button>
+</form>
+<table>
+  <thead><tr><th>Sold at</th><th>Product</th><th>Qty</th><th>Unit price</th><th>Batch</th></tr></thead>
+  <tbody>
+    {% for r in rows %}
+      <tr>
+        <td>{{ r['sold_at'] }}</td>
+        <td>{{ r['product_name'] }}</td>
+        <td>{{ r['quantity'] }}</td>
+        <td>{{ r['unit_price'] or '' }}</td>
+        <td>{{ r['batch_id'] or '' }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<p>Total amount: <strong>{{ '%.2f'|format(total) }}</strong></p>
+{% endblock %}

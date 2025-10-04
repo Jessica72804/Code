@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Dashboard</h2>
+<ul>
+  <li>Total products: <strong>{{ num_products }}</strong></li>
+  <li>Total stock on hand: <strong>{{ total_stock }}</strong></li>
+  <li>Low stock items: <strong>{{ low_stock }}</strong></li>
+  <li>Near expiry batches: <strong>{{ near_expiry }}</strong></li>
+  <li>Expired batches: <strong>{{ expired }}</strong></li>
+</ul>
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Batches</h2>
+<form method="get" style="margin-bottom:10px;">
+  <label>Filter by product
+    <select name="product_id" onchange="this.form.submit()">
+      <option value="">All products</option>
+      {% for p in products %}
+        <option value="{{ p['id'] }}" {% if selected_product == p['id'] %}selected{% endif %}>{{ p['name'] }}</option>
+      {% endfor %}
+    </select>
+  </label>
+</form>
+<table>
+  <thead><tr><th>Product</th><th>Lot</th><th>Expiry</th><th>Qty received</th><th>Qty remaining</th><th>Unit cost</th><th>Received at</th></tr></thead>
+  <tbody>
+    {% for b in batches %}
+      <tr>
+        <td>{{ b['product_name'] }}</td>
+        <td>{{ b['lot_number'] or '' }}</td>
+        <td>{{ b['expiry_date'] }}</td>
+        <td>{{ b['quantity_received'] }}</td>
+        <td>{{ b['quantity_remaining'] }}</td>
+        <td>{{ b['unit_cost'] or '' }}</td>
+        <td>{{ b['received_at'] }}</td>
+      </tr>
+    {% endfor %}
+  </tbody>
+</table>
+{% endblock %}

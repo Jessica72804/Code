@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Sell Product</h2>
+<form method="post" style="display:grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap:8px;">
+  <label>Product
+    <select name="product_id" required>
+      {% for p in products %}
+        <option value="{{ p['id'] }}">{{ p['name'] }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Quantity<input type="number" name="quantity" min="1" value="1" required></label>
+  <label>Unit price<input type="number" step="0.01" name="unit_price"></label>
+  <button type="submit">Sell</button>
+</form>
+{% if unsatisfied is not none %}
+  <p>Unsatisfied quantity: <strong>{{ unsatisfied }}</strong></p>
+{% endif %}
+{% endblock %}

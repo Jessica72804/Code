@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Alerts</h2>
+<h3>Low Stock</h3>
+<table>
+  <thead><tr><th>Product</th><th>Stock</th><th>Threshold</th></tr></thead>
+  <tbody>
+  {% for p in low_stock %}
+    <tr>
+      <td>{{ p['name'] }}</td>
+      <td>{{ p['stock_on_hand'] }}</td>
+      <td>{{ p['low_stock_threshold'] }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<h3>Near Expiry (next 30 days)</h3>
+<table>
+  <thead><tr><th>Product</th><th>Lot</th><th>Expiry</th><th>Qty remaining</th></tr></thead>
+  <tbody>
+  {% for b in near_expiry %}
+    <tr>
+      <td>{{ b['product_name'] }}</td>
+      <td>{{ b['lot_number'] or '' }}</td>
+      <td>{{ b['expiry_date'] }}</td>
+      <td>{{ b['quantity_remaining'] }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+
+<h3>Expired</h3>
+<table>
+  <thead><tr><th>Product</th><th>Lot</th><th>Expiry</th><th>Qty remaining</th></tr></thead>
+  <tbody>
+  {% for b in expired %}
+    <tr>
+      <td>{{ b['product_name'] }}</td>
+      <td>{{ b['lot_number'] or '' }}</td>
+      <td>{{ b['expiry_date'] }}</td>
+      <td>{{ b['quantity_remaining'] }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+{% endblock %}
